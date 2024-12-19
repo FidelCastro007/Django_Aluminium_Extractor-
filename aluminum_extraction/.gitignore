@@ -1,0 +1,4 @@
+.Aluminium/
+aluminum_extraction/__pycache__/
+processing/__pycache__/
+processing/migrations/__pycache__/

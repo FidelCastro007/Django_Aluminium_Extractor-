@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,10 +32,11 @@ LOGIN_URL = '/login/'
 
 LOGIN_REDIRECT_URL = '/'  # or wherever you want to redirect after login
 
+LOGOUT_REDIRECT_URL = '/'  # Redirect to homepage or any other page after logout
+
 # If you're using custom static file locations, you can specify:
-STATICFILES_DIRS = [
-    BASE_DIR / "static",  # This will make sure that files in the 'static' folder are served
-]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
 
 STATIC_ROOT = BASE_DIR / "staticfiles"  # This is where the static files will be collected in production
 
@@ -144,3 +146,8 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Automatically log out users after browser is closed
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_COOKIE_AGE = 3600  # 1 hour session time
+
