@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=vq^^$%+k4d+bbsm$x%k)rp=80fl%w$)c_2os6p#j4tc_c@%)^'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = []
 
 LOGIN_URL = '/login/'
 
@@ -96,11 +97,11 @@ WSGI_APPLICATION = 'aluminum_extraction.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Alumin_Users_DB',      # Replace with your database name
-        'USER': 'admin1',         # Replace with your MySQL username
-        'PASSWORD': 'admin123', # Replace with your MySQL password
-        'HOST': 'localhost',               # Set to your MySQL server host (default: 'localhost')
-        'PORT': '3306',                    # Set to your MySQL server port (default: 3306)
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST', default='localhost'),
+        'PORT': config('DB_PORT', default=3306, cast=int),
     }
 }
 
