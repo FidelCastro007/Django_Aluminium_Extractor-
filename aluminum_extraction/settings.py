@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 from pathlib import Path
 import os
 from decouple import config
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -95,14 +96,9 @@ WSGI_APPLICATION = 'aluminum_extraction.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('MYSQL_DATABASE'),
-        'USER': config('MYSQL_USER', default='root'),
-        'PASSWORD': config('MYSQLPASSWORD'),
-        'HOST': config('MYSQL_HOST', default='mysql.railway.internaly'),
-        'PORT': config('MYSQL_PORT', default=3306, cast=int),
-    }
+    'default': dj_database_url.config(
+        default=config('MYSQL_URL', default='mysql://root:password@localhost:3306/dbname')  # Default if MYSQL_URL not found
+    )
 }
 
 # Password validation
