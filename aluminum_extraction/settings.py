@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-=vq^^$%+k4d+bbsm$x%k)rp=80fl%w$)c_2os6p#j4tc_c@%)^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["https://aluminium-extractor-plus.onrender.com"]
+ALLOWED_HOSTS = ["*"]
 
 LOGIN_URL = '/login/'
 
