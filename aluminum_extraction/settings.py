@@ -96,10 +96,19 @@ WSGI_APPLICATION = 'aluminum_extraction.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=config('MYSQL_URL', default='mysql://root:password@localhost:3306/dbname')  # Default if MYSQL_URL not found
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'lwWdYciVcafdzaoSsCpuxGCBNJRqYmqE',
+        'HOST': 'junction.proxy.rlwy.net',
+        'PORT': '57966',
+        'OPTIONS': {
+            'ssl': {'ca': None},  # Disable SSL verification
+        },
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
