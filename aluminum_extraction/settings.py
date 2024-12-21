@@ -97,15 +97,13 @@ WSGI_APPLICATION = 'aluminum_extraction.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': config('DB_NAME'),
-        'USER': config('DB_USER'),
-        'PASSWORD': config('DB_PASSWORD'),
-        'HOST': config('DB_HOST', default='localhost'),
-        'PORT': config('DB_PORT', default=3306, cast=int),
+        'NAME': config('MYSQL_DATABASE'),
+        'USER': config('MYSQL_USER', default='root'),
+        'PASSWORD': config('MYSQLPASSWORD'),
+        'HOST': config('MYSQL_HOST', default='mysql.railway.internaly'),
+        'PORT': config('MYSQL_PORT', default=3306, cast=int),
     }
 }
-
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
