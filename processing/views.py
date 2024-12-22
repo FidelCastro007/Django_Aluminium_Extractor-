@@ -66,7 +66,7 @@ def login_view(request):
         except ProgrammingError as e:
             if "auth_user" in str(e):
                 # Specific error for missing `auth_user` table
-                error_message = "The authentication system is not set up properly. Please contact support."
+                error_message = "Invalid username or password."
                 return render(request, 'processing/login.html', {
                     'form': form,
                     'error': error_message
