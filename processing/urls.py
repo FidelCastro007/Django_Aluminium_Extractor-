@@ -20,5 +20,6 @@ urlpatterns = [
     path('edit_byproduct/<int:byproduct_id>/', views.edit_byproduct, name='edit_byproduct'),
     path('byproduct/<int:byproduct_id>/', views.byproduct_details, name='byproduct_details'),
     path('reset-auto-increment/', views.reset_auto_increment, name='reset_auto_increment'),
+    path('login/', CustomLoginView.as_view(), name='login'),
 ]
  
