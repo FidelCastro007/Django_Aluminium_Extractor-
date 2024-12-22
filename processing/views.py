@@ -15,6 +15,7 @@ from django.db import transaction
 from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.db import ProgrammingError
 from django.shortcuts import HttpResponse
 from django.db import connection
 from django.contrib.auth import logout
@@ -52,15 +53,27 @@ def login_view(request):
         return redirect('homepage')  # If the user is already logged in, redirect to homepage
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            if user is not None:
-                login(request, user)
-                return redirect('homepage')
+        try:
+            if form.is_valid():
+                user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+                if user is not None:
+                    login(request, user)
+                    return redirect('homepage')
+                else:
+                    return render(request, 'processing/login.html', {'form': form, 'error': 'Invalid username or password.'})
             else:
-                return render(request, 'processing/login.html', {'form': form, 'error': 'Invalid username or password.'})
-        else:
-            return render(request, 'processing/login.html', {'form': form, 'error': 'Please correct the errors below.'})
+                return render(request, 'processing/login.html', {'form': form, 'error': 'Please correct the errors below.'})
+        except ProgrammingError as e:
+            if "auth_user" in str(e):
+                # Specific error for missing `auth_user` table
+                error_message = "The authentication system is not set up properly. Please contact support."
+                return render(request, 'processing/login.html', {
+                    'form': form,
+                    'error': error_message
+                })
+            else:
+                # Re-raise other programming errors
+                raise e
     else:
         form = AuthenticationForm()
     return render(request, 'processing/login.html', {'form': form})
