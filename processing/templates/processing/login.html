@@ -74,9 +74,12 @@
         <h1>Login</h1>
         
          <!-- Display error message -->
-        {% if error %}
-        <div class="alert alert-danger" role="alert">
-            {{ error }}
+        {% if form.errors %}
+            <div class="error">
+                <p>!! Please Register !! If you don't have access. <br> Please check the fields below.</p>
+            </div>
+        {% endif %}
+        
         </div>
         {% endif %}
         
