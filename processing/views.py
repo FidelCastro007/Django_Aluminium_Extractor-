@@ -76,7 +76,9 @@ def login_view(request):
                 raise e
     else:
         form = AuthenticationForm()
-    return render(request, 'processing/login.html', {'form': form})
+    #error message
+    error_message = "Invalid username or password."
+    return render(request, 'processing/login.html', {'form': form,  'error_message':  error_message})
 
 def logout_view(request):
     logout(request)  # This will log out the user and clear the session
