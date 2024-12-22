@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'aluminum_extraction.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
+        'NAME': 'Alumin_Users_DB',
         'USER': 'root',
         'PASSWORD': 'lwWdYciVcafdzaoSsCpuxGCBNJRqYmqE',
         'HOST': 'junction.proxy.rlwy.net',
